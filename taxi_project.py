@@ -51,7 +51,7 @@ def start_program():
         si_moeve = False
 
         print("\nInstrucciones:")
-        print("Ingrese 'm' si el taxi se está moviendo actualmente.")
+        print("Ingrese 's' si el taxi se está moviendo actualmente.")
         print("Ingrese 'p' si el taxi está detenido actualmente.")
         print("Ingrese 'r' para restablecer las tarifas.")
         print("Presiona Enter para terminar la carrera y calcular la tarifa.")
