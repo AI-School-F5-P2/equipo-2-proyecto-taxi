@@ -1,5 +1,6 @@
 # importe el módulo de tiempo para calcular la duración del viaje en taxi en segundos.
 import time
+import unittest
 
 # Registrar la hora de inicio de la carrera.
 start_time = time.time()
@@ -14,7 +15,7 @@ move_tarifa = pordefecto_move_tarifa
 
 
 # Calcula la duración del viaje en segundos
-def calcular_tarifa(start_time, stop_time, si_moeve):
+def calcular_tarifa(start_time, stop_time, si_moeve, stop_tarifa, move_tarifa):
     duracion = stop_time - start_time
 
 
@@ -76,7 +77,7 @@ def start_program():
         stop_time = time.time()
 
         # Calcular la tarifa del viaje
-        tarifa = calcular_tarifa(start_time, stop_time, si_moeve)
+        tarifa = calcular_tarifa(start_time, stop_time, si_moeve, stop_tarifa, move_tarifa)
 
         # Mostrar la tarifa calculada
         print("\nFare Calculation:")
@@ -94,5 +95,37 @@ def start_program():
             break
 
 
-# Program start
 start_program()
+
+
+# unit test 1
+class TarifaCalculacionTest(unittest.TestCase):
+    def test_tarifa_calcula_stop(self):
+        start_time = time.time()
+        stop_time = start_time + 10
+        si_moeve = False
+        stop_tarifa = 0.02
+        move_tarifa = 0.05
+
+        tarifa_estimada = 10 * stop_tarifa
+
+        tarifa = calcular_tarifa(start_time, stop_time, si_moeve, stop_tarifa, move_tarifa)
+
+        self.assertEqual(tarifa_estimada, tarifa)
+
+    def test_tarifa_calcula_move(self):
+        start_time = time.time()
+        stop_time = start_time + 10
+        si_moeve = True
+        stop_tarifa = 0.02
+        move_tarifa = 0.05
+
+        tarifa_estimada = 10 * move_tarifa
+
+        tarifa = calcular_tarifa(start_time, stop_time, si_moeve, stop_tarifa, move_tarifa)
+
+        self.assertEqual(tarifa_estimada, tarifa)
+
+
+    if __name__ == '__main__':
+        unittest.main()
