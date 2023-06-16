@@ -1,3 +1,6 @@
+
+import time 
+
 # importe el módulo de tiempo para calcular la duración del viaje en taxi en segundos.
 import logging 
 
@@ -35,7 +38,13 @@ import logging
 
 logging.basicConfig(filename='taxi.log',level=logging.INFO)
 
-def consultar_registro()
+
+duracion = 10.5
+tarifa = 25.50
+distancia = 7.8
+si_mueve = True
+
+def consultar_registro():
     with open('taxi.log', 'r') as f:
         print(f.read())
 
@@ -73,12 +82,13 @@ while True:
 
         # Mostrar la tarifa calculada
         print("Tarifa total: {:.2f} Euros".format(tarifa))
-        logging.info('Duración: {} segundos; tarifa:{:.2f} Euros; Distancia recorrida:{} km; Estado del taxi: {}'.format(duracion, tarifa, distancia, si_moeve))
+        logging.info('Duración: {:.2f} segundos; tarifa:{:.2f} Euros; Distancia recorrida:{} km; Estado del taxi: {}'.format(duracion, tarifa, distancia, si_mueve))
 
         # Solicitar al usuario que comience una nueva carrera o salga
         nueva_carrera = input("Empezar una nueva carrera? (yes/no): ").lower()
         if nueva_carrera != "y":
-            break: consultar_registro()
+            break 
+        consultar_registro()
 
 # Program start
 start_program()
