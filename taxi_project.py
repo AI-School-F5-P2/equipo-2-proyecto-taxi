@@ -70,12 +70,12 @@ class TaxiTarifaCalculador:
             tarifa = self.calcular_tarifa(start_time, stop_time, si_moeve)
 
         # Mostrar la tarifa calculada
-            print("\nFare Calculation:")
+            print("\nCalculacion de Tarifa:")
             print("\nStart Time: {}".format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time))))
             print("End Time: {}".format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stop_time))))
-            print("Stopped Rate: {:.2f} Euros/second".format(self.stop_tarifa))
-            print("Moving Rate: {:.2f} Euros/second".format(self.move_tarifa))
-            print("Duration: {:.2f} seconds".format(stop_time - start_time))
+            print("Stop Tarifa: {:.2f} Euros/segundos".format(self.stop_tarifa))
+            print("Move Tarifa: {:.2f} Euros/segundos".format(self.move_tarifa))
+            print("Duracion: {:.2f} seconds".format(stop_time - start_time))
 
             print("\nTarifa total: {:.2f} Euros".format(tarifa))
 
