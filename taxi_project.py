@@ -2,6 +2,7 @@
 import time
 import unittest
 
+start_time = time.time()
 
 # Inicializar tarifas con POO
 class TaxiTarifaCalculador:
@@ -87,7 +88,7 @@ class TaxiTarifaCalculador:
 
 calculator = TaxiTarifaCalculador()
 calculator.start_program()
-
+print("--- %.5f seconds ---" % (time.time() - start_time))
 
 # unit test 1
 class TarifaCalculacionTest(unittest.TestCase):
