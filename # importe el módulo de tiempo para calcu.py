@@ -44,7 +44,7 @@ def restablecer_tarifa():
 
     print('Tarifas actualizadas con éxito!')
     mostrar_historial()
-
+ 
     return stop_tarifa, move_tarifa
 
 def mostrar_historial():
@@ -172,3 +172,5 @@ class TarifaCalculacionTest(unittest.TestCase):
 
     if __name__ == '__main__':
         unittest.main()
+
+        

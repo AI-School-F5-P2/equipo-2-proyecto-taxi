@@ -1,0 +1,24 @@
+start Time: 2023-06-22 08:54:29
+Stop Time: 2023-06-22 08:54:35
+Duración: 5.41 seconds
+Si se mueve: True
+Tarifa total: 0.27 Euros
+
+start Time: 2023-06-22 08:56:24
+Stop Time: 2023-06-22 08:56:46
+Duración: 22.40 seconds
+Si se mueve: True
+Tarifa total: 1.12 Euros
+
+start Time: 2023-06-22 08:57:40
+Stop Time: 2023-06-22 08:58:46
+Duración: 65.50 seconds
+Si se mueve: False
+Tarifa total: 1.31 Euros
+
+start Time: 2023-06-22 09:02:52
+Stop Time: 2023-06-22 09:04:58
+Duración: 126.51 seconds
+Si se mueve: True
+Tarifa total: 6.33 Euros
+

@@ -1,94 +1,174 @@
-
-import time 
-
 # importe el módulo de tiempo para calcular la duración del viaje en taxi en segundos.
-import logging 
+import time
+import unittest
+import logging
+import os
+
+
+if os.path.isfile('datos_tarifa'):
+    print('Archivo creado correctamente' )
+else:
+    print('No se pudo crear el archivo')
 
 # Configura el manejador de logs
-logging.basicConfig(filename='taxi.log', level=logging.INFO)
+logging.basicConfig(filename='taxi.log', level=logging.DEBUG)
+
 
 # Registrar la hora de inicio de la carrera.
-logging.info('Inicio de carrera: {}'.format(time.ctime()))
+#logging.info('Inicio de carrera: {}'.format(time.ctime()))
 
-import time 
+# Inicializar tarifas con POO
+class TaxiTarifaCalculador:
+    def __init__(self, stop_tarifa=0.02, move_tarifa=0.05):
+        self.stop_tarifa = stop_tarifa
+        self.move_tarifa = move_tarifa
+        self.historial_carreras = []
 
-# Registrar la hora de inicio de la carrera.
-start_time = time.time()
-
-# Constantes para tarifas
-stop_tarifa = 0.02
-move_tarifa = 0.05
 
 # Calcula la duración del viaje en segundos
-def calcular_tarifa(start_time, stop_time, si_moeve):
-    duracion = stop_time - start_time
+    def calcular_tarifa(self, start_time, stop_time, si_moeve):
+        duracion = stop_time - start_time
+ 
+# crear diccionario con los datos de la carreas
+        carrera = {'start_time': start_time, 'stop_time': stop_time, 'duracion': duracion, 'si_moeve': si_moeve,
+                    'tarifa': 0}
 
 # Calcule la tarifa en función de si el taxi se mueve o no
-    if si_moeve:
-        tarifa = duracion * move_tarifa
-    else:
-        tarifa = duracion * stop_tarifa
-    return tarifa
+        if si_moeve:
+            tarifa = duracion * self.move_tarifa
+        else:
+            tarifa = duracion * self.stop_tarifa
 
-def start_program():
-    print("Bienvenido al Programa de Cálculo de Tarifas de Taxi!")
-    print("Este programa calcula la tarifa de un viaje en taxi según los criterios dados.")
+        carrera['tarifa'] = tarifa
 
-import logging
-
-logging.basicConfig(filename='taxi.log',level=logging.INFO)
+        #agregar la carreas al historial
+        self.historial_carreras.append(carrera)   
 
 
-duracion = 10.5
-tarifa = 25.50
-distancia = 7.8
-si_mueve = True
+        #Guardar los datos en un archivo .txt
+        with open('datos_tarifa.txt', 'w') as archivo:
+            archivo.write("Start Time: {}\n".format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time))))
+            archivo.write("End Time: {}\n".format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stop_time))))
+            archivo.write("Stop Tarifa: {:.2f} Euros/segundos\n".format(self.stop_tarifa))
+            archivo.write("Move Tarifa: {:.2f} Euros/segundos\n".format(self.move_tarifa))
+            archivo.write("Duracion: {:.2f} seconds\n\n".format(stop_time - start_time))
+            archivo.write("Tarifa total: {:.2f} Euros".format(tarifa))
 
-def consultar_registro():
-    with open('taxi.log', 'r') as f:
-        print(f.read())
 
-#registrar la hora de inicio de la carrera
-logging.info('inicio de carrera: {}'.format(time.ctime()))
+        return tarifa
+    
 
-while True:
-        print("\nPara comenzar la carrera, presiona Enter.")
-        input("Presione Enter para comenzar...")
+# Actualización de tarifas
+    def restablecer_tarifa(self): 
+        logging.info('\nRestablecer tarifa?')
+        stop_tarifa = float(input('Introduce la nueva tarifa parada (Euros por segundo): '))
+        move_tarifa = float(input('Introduce la nueva tarifa movimiento (Euros por segundo): '))
 
-        # Inicializar el estado del taxi como detenido (sin movimiento)
-        si_moeve = False
+        self.stop_tarifa = stop_tarifa
+        self.move_tarifa = move_tarifa
 
-        print("\nInstrucciones:")
-        print("Ingrese 's' si el taxi se está moviendo actualmente.")
-        print("Ingrese 'p' si el taxi está detenido actualmente.")
-        print("Presiona Enter para terminar la carrera y calcular la tarifa.")
+
+        logging.info("Tarifas actualizadas: stop tarifa: %s, move tarifa: %s", stop_tarifa, move_tarifa)
+        print('Tarifas actualizadas con éxito!')
+
+        
+
+    def start_program(self):
+        logging.info("Iniciar programa")
+        print("Bienvenido al Programa de Cálculo de Tarifas de Taxi!")
+        print("Este programa calcula la tarifa de un viaje en taxi según los criterios dados.")
 
         while True:
-            status = input("Taxi estado: ").lower()
-            if status == "s":
-                si_moeve = True
-            elif status == "p":
-                si_moeve = False
-            elif status == "":
-                break
-            else:
-                print("Entrada inválida. Ingrese 's', 'p', o presione Enter.")
+            input("\nPresione Enter para comenzar...")
+            logging.info("nuevo viaje")
+
+        # Inicializar el estado del taxi como detenido (sin movimiento)
+            si_moeve = False
+            start_time = time.time()
+
+            print("\nInstrucciones:")
+            print("Ingrese 's' si el taxi se está moviendo actualmente.")
+            print("Ingrese 'p' si el taxi está detenido actualmente.")
+            print("Ingrese 'r' para restablecer las tarifas.")
+            print("Presiona Enter para terminar la carrera y calcular la tarifa.")
+
+            while True:
+                status = input("Taxi estado: ").lower()
+                if status == 's':
+                    si_moeve = True
+                elif status == 'p':
+                    si_moeve = False
+                elif status == '':
+                    break
+                elif status == 'r':
+                    self.restablecer_tarifa()
+
+                else:
+                    print("Entrada inválida. Ingrese 's', 'p', 'r' o presione Enter.")
 
         # Registrar la hora de finalización de la carrera.
-        stop_time = time.time()
-
+            stop_time = time.time()
         # Calcular la tarifa del viaje
-        tarifa = calcular_tarifa(start_time, stop_time, si_moeve)
+            tarifa = self.calcular_tarifa(start_time, stop_time, si_moeve)
 
         # Mostrar la tarifa calculada
-        print("Tarifa total: {:.2f} Euros".format(tarifa))
-        logging.info('Duración: {:.2f} segundos; tarifa:{:.2f} Euros; Distancia recorrida:{} km; Estado del taxi: {}'.format(duracion, tarifa, distancia, si_mueve))
+            print("\nCalculacion de Tarifa:")
+            print("\nStart Time: {}".format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time))))
+            print("End Time: {}".format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stop_time))))
+            print("Stop Tarifa: {:.2f} Euros/segundos".format(self.stop_tarifa))
+            print("Move Tarifa: {:.2f} Euros/segundos".format(self.move_tarifa))
+            print("Duracion: {:.2f} seconds".format(stop_time - start_time))
+            print("\nTarifa total: {:.2f} Euros".format(tarifa))
+            logging.info("\nTarifa total: {:.2f} Euros".format(tarifa))
+                # Solicitar al usuario que comience una nueva carrera o salga
+            nueva_carrera = input("Empezar una nueva carrera? (yes/no): ").lower()
+            if nueva_carrera != "y":
+                break 
 
-        # Solicitar al usuario que comience una nueva carrera o salga
-        nueva_carrera = input("Empezar una nueva carrera? (yes/no): ").lower()
-        if nueva_carrera != "y":
-            break 
-        consultar_registro()
+            #Guardar el historial de carreras en un archivo .txt
+            with open('historial_carreras.txt', 'w') as archivo:
+                for carrera in self.historial_carreras:
+                    archivo.write('start Time: {}\n'. format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(carrera['start_time']))))
+                    archivo.write('Stop Time: {}\n'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(carrera['stop_time']))))
+                    archivo.write('Duración: {:.2f} seconds\n'.format(carrera['duracion']))
+                    archivo.write('Si se mueve: {}\n'.format(carrera['si_moeve']))
+                    archivo.write('Tarifa total: {:.2f} Euros\n\n'.format(carrera['tarifa']))
 
-# Program start
-start_program()
+                    print('\nHistorial de carreras guardado en el archivo historial_carreras.txt')
+
+
+
+
+
+
+
+
+
+
+
+
+        logging.info("programa finalizador")
+calculator = TaxiTarifaCalculador()
+calculator.start_program()
+
+
+# unit test 1
+class TarifaCalculacionTest(unittest.TestCase):
+    def test_tarifa_calcula_stop(self):
+        calculator = TaxiTarifaCalculador()
+        tarifa = calculator.calcular_tarifa(0, 20, False)
+        self.assertEqual(tarifa, 0.4)
+
+    def test_tarifa_calcula_move(self):
+        calculator = TaxiTarifaCalculador()
+        tarifa = calculator.calcular_tarifa(0, 20, True)
+        self.assertEqual(tarifa, 1)
+
+    def test_tarifa_calcula_tarifaRestablesida(self):
+        calculator = TaxiTarifaCalculador(0.3, 0.7)
+        tarifa = calculator.calcular_tarifa(0, 20, True)
+        self.assertEqual(tarifa, 14)
+
+
+if __name__ == '__main__':
+    unittest.main()
