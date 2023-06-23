@@ -5,6 +5,7 @@ import logging
 import os
 
 
+
 if os.path.isfile('datos_tarifa'):
     print('Archivo creado correctamente' )
 else:
@@ -24,7 +25,7 @@ class TaxiTarifaCalculador:
         self.move_tarifa = move_tarifa
         self.historial_carreras = []
 
-
+  
 # Calcula la duración del viaje en segundos
     def calcular_tarifa(self, start_time, stop_time, si_moeve):
         duracion = stop_time - start_time
@@ -143,13 +144,10 @@ class TaxiTarifaCalculador:
 
 
 
-
-
-
-
         logging.info("programa finalizador")
 calculator = TaxiTarifaCalculador()
 calculator.start_program()
+
 
 
 # unit test 1
@@ -171,4 +169,5 @@ class TarifaCalculacionTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
+
     unittest.main()
