@@ -216,3 +216,34 @@ INFO:root:inicio de carrera: Fri Jun 16 11:07:50 2023
 INFO:root:Inicio de carrera: Fri Jun 16 11:37:46 2023
 INFO:root:inicio de carrera: Fri Jun 16 11:37:46 2023
 
+DEBUG:asyncio:Using selector: KqueueSelector
+INFO:root:Iniciar programa
+INFO:root:programa finalizador
+DEBUG:asyncio:Using selector: KqueueSelector
+INFO:root:Iniciar programa
+INFO:root:
+Restablecer tarifa?
+INFO:root:Tarifas actualizadas: stop tarifa: 0.3, move tarifa: 0.7
+DEBUG:asyncio:Using selector: KqueueSelector
+INFO:root:Iniciar programa
+INFO:root:
+Restablecer tarifa?
+INFO:root:Tarifas actualizadas: stop tarifa: 0.3, move tarifa: 0.9
+DEBUG:asyncio:Using selector: KqueueSelector
+INFO:root:Iniciar programa
+INFO:root:
+Restablecer tarifa?
+INFO:root:Tarifas actualizadas: stop tarifa: 0.3, move tarifa: 0.9
+INFO:root:programa finalizada
+DEBUG:asyncio:Using selector: KqueueSelector
+INFO:root:Iniciar programa
+INFO:root:
+Restablecer tarifa?
+INFO:root:Tarifas actualizadas: stop tarifa: 0.3, move tarifa: 0.9
+INFO:root:programa finalizada
+DEBUG:asyncio:Using selector: KqueueSelector
+INFO:root:Iniciar programa
+INFO:root:
+Restablecer tarifa?
+INFO:root:Tarifas actualizadas: stop tarifa: 0.3, move tarifa: 0.9
+INFO:root:programa finalizada
