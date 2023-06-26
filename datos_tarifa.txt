@@ -1,7 +1,0 @@
-Start Time: 2023-06-26 11:51:10
-End Time: 2023-06-26 11:51:30
-Stop Tarifa: 0.06 Euros/segundos
-Move Tarifa: 0.30 Euros/segundos
-Duracion: 20.22 seconds
-
-Tarifa total: 1.21 Euros
