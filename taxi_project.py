@@ -8,6 +8,9 @@ import logging
 # Configura el manejador de logs
 logging.basicConfig(filename='registro.log', level=logging.DEBUG)
 
+# Registrar la hora de inicio de la carrera.
+logging.info('Inicio de carrera: {}'.format(time.ctime()))
+
 start_time = time.time()
 
 
@@ -102,7 +105,7 @@ class TaxiTarifaCalculador:
             print("\nTarifa total: {:.2f} Euros".format(tarifa))
 
             #Guardar el historial de carreras en un archivo .txt
-            with open('historial_carreras.txt', 'w') as archivo:
+            with open('historial_carreras.txt', 'a') as archivo:
                 for carrera in self.historial_carreras:
                     archivo.write('start Time: {}\n'. format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(carrera['start_time']))))
                     archivo.write('Stop Time: {}\n'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(carrera['stop_time']))))
@@ -128,5 +131,5 @@ asyncio.run(calculator.start_program())
 
 print("--- %.5f seconds ---" % (time.time() - start_time))
 
-logging.info("programa finalizada")
+logging.info("programa finalizada: {}" .format(time.ctime()))
 
