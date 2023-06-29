@@ -8,6 +8,7 @@ import logging
 # Configura el manejador de logs
 logging.basicConfig(filename='registro.log', level=logging.DEBUG)
 
+
 # Registrar la hora de inicio de la carrera.
 logging.info('Inicio de carrera: {}'.format(time.ctime()))
 
@@ -131,5 +132,4 @@ asyncio.run(calculator.start_program())
 
 print("--- %.5f seconds ---" % (time.time() - start_time))
 
-logging.info("programa finalizada: {}" .format(time.ctime()))
-
+logging.info("programa finalizada: {}".format(time.ctime()))
